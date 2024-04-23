@@ -1,0 +1,102 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    关于
+{% endblock title %}
+
+{% block content %}
+<br>
+<div class="media border p-3">
+    <div class="media-body">
+        <h2>Jackyfeng</h2>
+        大家好,我是<em>WANG</em>,
+        <br><strong>Python爱好者</strong>一名,
+        <br>欢迎来到<em><strong>我的博客</strong>.</em>
+    </div>
+    <img src="{% static 'img/about.jpg' %}"
+        alt="about" 
+        style="max-width:100%; 
+        border-radius: 20px ;
+        width: 200px ;height: 120px;"
+        ><br>
+</div>
+    <h4>技能</h4>
+    <h5 style="color: seagreen;">1,编程</h5>
+    <div class="progress">
+        <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" style="width:60%">
+            Python
+        </div>
+        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:20%">
+            Html
+        </div>
+        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width:10%">
+            JavaScript
+        </div>
+        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:10%">
+            Scratch
+        </div>
+    </div>
+    <h5 style="color: rgba(26, 150, 207, 0.815);">2,学习能力</h5>
+    <div class="progress">
+        <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" style="width:25%">
+            数学
+        </div>
+        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:30%">
+            英语
+        </div>
+        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width:25%">
+            语文
+        </div>
+        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:8%">
+            音体美
+        </div>
+        <div class="progress-bar bg-secondary progress-bar-striped progress-bar-animated" style="width:12%">
+            其他
+        </div>
+    </div>
+    <h5 style="color: rgba(225, 240, 18, 0.829);">3,闲暇</h5>
+    <div class="progress">
+        <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" style="width:40%">
+            编程
+        </div>
+        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:30%">
+            看书
+        </div>
+        <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style="width:20%">
+            运动
+        </div>
+        <div class="progress-bar bg-secondary progress-bar-striped progress-bar-animated" style="width:10%">
+            其他
+        </div>
+    </div>
+    <hr>
+    <h4>联系方式</h4>
+    <i class="zi zi_tmQq" zico="qq" style="color:royalblue;"></i>
+    1151471829<br>
+    <i class="zi zi_phone" zico="话筒黑" style="color: teal;"></i>
+    15390312878<br>
+    <i class="zi zi_tmGithub" zico="github"></i>
+    https://www.github.com/jackyfzh<br>
+    <i class="zi zi_envelope" zico="信封" style="color: mediumpurple;"></i>
+    1151471829@qq.com<br>
+    <i class="zi zi_tmWeibo" zico="微博" style="color: brown;"></i>
+    @无忧小满_<br>
+    <hr>
+    <h4></h4>
+    <div class="alert alert-success" role="alert">
+        喜欢记录生活，喜欢美景，热爱自然<br>
+
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="col">
+                <img src="{% static 'img/wechat.jpg' %}" alt="wechat" style="width: 300px;height:300px ;">
+            </div>
+            <div class="col">
+                <img src="{% static 'img/alipay.jpg' %}" alt="alipay" style="width: 300px;height:300px ;">
+            </div>
+        </div>
+    </div>
+{% endblock content %}

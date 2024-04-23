@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    留言板
+{% endblock title %}
+
+{% block content %}
+<h4>留言板</h4><br>
+<div class="alert alert-info" role="alert">
+    可以在这里把你想对博主说的话说出来，也可以给博客评论，提意见。
+</div>
+<div id="gitalk-container"></div>
+{% endblock content %}

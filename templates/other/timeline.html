@@ -1,0 +1,25 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    时间线
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h6>人面不知何处去，桃花依旧笑春风。</h6><br>
+            {% for t in ts %}
+            <br>{{ t.created }}  @ {{ t.author }}&nbsp;&nbsp;&nbsp;
+            {% if t.path %}
+            <a href="{{ t.path }}">{{ t.content }}</a>
+            {% else %}
+            {{ t.content }}
+            {% endif %}<br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
