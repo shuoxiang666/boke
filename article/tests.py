@@ -1,13 +1,22 @@
+from time import sleep
+
 from django.test import TestCase
 import datetime
+
+from django.urls import reverse
 from django.utils import timezone
 from article.models import ArticlePost
 from django.contrib.auth.models import User
+
 
 # Create your tests here.
 
 
 class ArticlePostModelTests(TestCase):
+
+    def __init__(self, methodName: str = "runTest"):
+        super().__init__(methodName)
+        self.created = None
 
     def test_was_created_recently_with_future_article(self):
         # 若文章创建时间为未来，返回 False
@@ -19,10 +28,10 @@ class ArticlePostModelTests(TestCase):
             title='test',
             body='test',
             created=timezone.now() + datetime.timedelta(days=30)
-            )
+        )
 
         self.assertIs(future_article.was_created_recently(), False)
-    
+
     def was_created_recently(self):
         diff = timezone.now() - self.created
 
@@ -31,6 +40,7 @@ class ArticlePostModelTests(TestCase):
             return True
         else:
             return False
+
 
 class ArtitclePostViewTests(TestCase):
 
@@ -42,7 +52,7 @@ class ArtitclePostViewTests(TestCase):
             author=author,
             title='test4',
             body='test4',
-            )
+        )
         article.save()
         self.assertIs(article.total_views, 0)
 
@@ -60,7 +70,7 @@ class ArtitclePostViewTests(TestCase):
             author=author,
             title='test5',
             body='test5',
-            )
+        )
         article.save()
 
         sleep(0.5)

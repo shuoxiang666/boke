@@ -1,17 +1,21 @@
 from django import template
 from django.utils import timezone
 import math
+
 register = template.Library()
+
 
 @register.filter(name='transfer')
 def transfer(value, arg):
     # 将输出强制转换为字符串 arg
     return arg
 
+
 @register.filter()
 def lower(value):
     # 将字符串转换为小写字符
     return value.lower()
+
 
 # 获取相对时间
 @register.filter(name='timesince_zh')

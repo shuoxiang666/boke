@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 import notifications.urls
 
 admin.site.site_title = '博客网站后台'
-admin.site.site_header = 'Jacky的个人网站后台'
+admin.site.site_header = 'WANG的个人网站后台'
 
 urlpatterns = [
     path('jackypy/blog/background/ng', admin.site.urls),

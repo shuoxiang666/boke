@@ -3,8 +3,6 @@ from django.views import View
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from article.models import ArticlePost
-
-
 # Create your views here.
 
 
@@ -24,7 +22,6 @@ class CommentNoticeListView(LoginRequiredMixin, ListView):
 
 class CommentNoticeUpdateView(View):
     """更新通知状态"""
-
     # 处理 get 请求
     def get(self, request):
         # 获取未读消息

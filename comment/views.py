@@ -53,3 +53,5 @@ def post_comment(request, article_id, parent_comment_id=None):
     # 处理其他请求
     else:
         return HttpResponse("仅接受GET/POST请求。")
+
+

@@ -1,10 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
+
+
 # 登录表单
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
+
 
 # 注册用户表单
 class UserRegisterForm(forms.ModelForm):
@@ -24,7 +27,8 @@ class UserRegisterForm(forms.ModelForm):
         else:
             raise forms.ValidationError("密码输入不一致,请重试。")
 
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('phone', 'avatar', 'bio','qq','wechat','net')
+        fields = ('phone', 'avatar', 'bio', 'qq', 'wechat', 'net')

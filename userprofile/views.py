@@ -10,8 +10,6 @@ from .forms import ProfileForm
 from .models import Profile
 
 
-# Create your views here.
-
 def user_login(request):
     if request.method == 'POST':
         user_login_form = UserLoginForm(data=request.POST)
