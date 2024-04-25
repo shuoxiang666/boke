@@ -49,3 +49,13 @@ class Timeline(models.Model):
 
     def __str__(self):
         return self.content[:20]
+
+
+class Message(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    content = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.name

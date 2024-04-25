@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Friend, SiteMessage, Timeline
+from .models import Message
+from .forms import MessageForm
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -13,10 +16,6 @@ def friends(request):
     return render(request, "other/friend.html", contaxt)
 
 
-def blog_comment(request):
-    return render(request, "other/comment.html")
-
-
 def messages(request):
     messages = SiteMessage.objects.all().last()
     contaxt = {"messages": messages}
@@ -27,3 +26,15 @@ def timeline(request):
     ts = Timeline.objects.all()
     contaxt = {"ts": ts}
     return render(request, "other/timeline.html", contaxt)
+
+
+def message_board(request):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('other:comment')
+    else:
+        form = MessageForm()
+    messages = Message.objects.all().order_by('-created_at')  # 按创建时间逆序排列留言
+    return render(request, 'other/comment.html', {'form': form, 'messages': messages})
