@@ -8,18 +8,152 @@
 
 {% block content %}
 <div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h6>人面不知何处去，桃花依旧笑春风。</h6><br>
-            {% for t in ts %}
-            <br>{{ t.created }}  @ {{ t.author }}&nbsp;&nbsp;&nbsp;
-            {% if t.path %}
-            <a href="{{ t.path }}">{{ t.content }}</a>
-            {% else %}
-            {{ t.content }}
-            {% endif %}<br>
-            {% endfor %}
+    <div class="timeline">
+        <!-- 已存在的事件 -->
+        <div class="timeline-item" onclick="showNextEvent(0)">
+            <div class="timeline-content">
+                <h2>2022</h2>
+                <p>这是一段描述。</p>
+                <img src="{% static 'img/1.jpg' %}" alt="Event 1" class="event-image">
+            </div>
+        </div>
+        <div class="timeline-item" onclick="showNextEvent(1)" style="display: none;">
+            <div class="timeline-content">
+                <h2>2023</h2>
+                <p>这是另一段描述。</p>
+                <img src="{% static 'img/2.jpg' %}" alt="Event 2" class="event-image">
+            </div>
+        </div>
+        <div class="timeline-item" onclick="showNextEvent(2)" style="display: none;">
+            <div class="timeline-content">
+                <h2>2024</h2>
+                <p>这是又一段描述。</p>
+                <img src="{% static 'img/3.jpg' %}" alt="Event 3" class="event-image">
+            </div>
+        </div>
+        <!-- 新添加的事件 -->
+        <div class="timeline-item" onclick="showNextEvent(3)" style="display: none;">
+            <div class="timeline-content">
+                <h2>2025</h2>
+                <p>这是第四个事件描述。</p>
+                <img src="{% static 'img/4.jpg' %}" alt="Event 4" class="event-image">
+            </div>
+        </div>
+        <div class="timeline-item" onclick="showNextEvent(4)" style="display: none;">
+            <div class="timeline-content">
+                <h2>2026</h2>
+                <p>这是第五个事件描述。</p>
+                <img src="{% static 'img/5.jpg' %}" alt="Event 5" class="event-image">
+            </div>
+        </div>
+        <!-- 最后一个事件 -->
+        <div id="last-event" class="timeline-item" style="display: none;">
+            <div class="timeline-content">
+                <h2>2027</h2>
+                <p>这是最后一段描述。</p>
+                <img src="{% static 'img/6.jpg' %}" alt="Last Event" class="event-image">
+            </div>
         </div>
     </div>
 </div>
+
+<div class="wave-container">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,96L60,112C120,128,240,160,360,154.7C480,149,600,107,720,106.7C840,107,960,149,1080,186.7C1200,224,1320,256,1380,272L1440,288L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+</div>
+
+<style>
+    .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 50px auto;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding: 20px 40px;
+        background: #f4f4f4;
+        margin: 50px 0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .timeline-item:hover {
+        transform: scale(1.05);
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 100%;
+        background: #333;
+        top: 0;
+        left: 20px;
+    }
+
+    .timeline-content {
+        position: relative;
+    }
+
+    .timeline-content h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .timeline-content p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .event-image {
+        max-width: 100%;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    #last-event {
+        animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1.1);
+        }
+    }
+
+    .wave-container {
+        position: relative;
+        width: 100%;
+        height: 100px;
+        overflow: hidden;
+        margin-top: 50px;
+    }
+
+    .wave-container svg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+    }
+</style>
+
+<script>
+    let currentIndex = 0;
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    function showNextEvent(index) {
+        timelineItems[currentIndex].style.display = 'none';
+        currentIndex = index + 1;
+        if (currentIndex < timelineItems.length) {
+            timelineItems[currentIndex].style.display = 'block';
+        } else {
+            document.getElementById('last-event').style.display = 'block';
+        }
+    }
+</script>
 {% endblock content %}

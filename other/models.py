@@ -38,7 +38,7 @@ class SiteMessage(models.Model):
 
 class Timeline(models.Model):
     objects = None
-    author = models.CharField(max_length=10000, blank=True, default="Jacky")
+    author = models.CharField(max_length=10000, blank=True, default="Wang")
     content = models.TextField()
     path = models.CharField(max_length=10000, blank=True)
     created = models.DateField(default=timezone.now)
@@ -55,7 +55,7 @@ class Message(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     content = models.TextField()
-    created_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(default=timezone.now, blank=True, null=True)
 
     def __str__(self):
         return self.name

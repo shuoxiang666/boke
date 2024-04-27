@@ -1,15 +1,15 @@
 {% load notifications_tags %}
 {% notifications_unread as unread_count %}
 
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #c1def3;">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
-            aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand hvr-grow-rotate" href="{% url 'article:article_list' %}">WANG的编程空间</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <div class="collapse navbar-collapse" id="navbarHeader">
-            <ul class="navbar-nav">
+        <a class="navbar-brand" href="{% url 'article:article_list' %}">My  Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'article:article_list' %}">文章</a>
                 </li>
@@ -25,32 +25,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'other:timeline' %}">时间线</a>
                 </li>
-                <div class="col-auto mr-auto">
-                    <form class="form-inline">
-                        <label class="sr-only">content</label>
-                        <input type="text"
-                               class="form-control mb-2 mr-sm-2"
-                               name="search"
-                               placeholder="搜索文章..."
-                               required
-                        >
-                    </form>
-                </div>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="搜索文章..." aria-label="Search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form>
+            <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!-- 小红点 -->
                             {% if unread_count %}
-                                <svg viewBox="0 0 8 8"
-                                     width="8px"
-                                     height="8px">
-                                    <circle cx="4"
-                                            cy="4"
-                                            r="4"
-                                            fill="#ff6b6b"
-                                    ></circle>
-                                </svg>
+                                <span class="badge badge-danger">!</span>
                             {% endif %}
                             {{ user.username }}
                         </a>
@@ -72,21 +58,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'userprofile:register' %}">注册</a>
                     </li>
-                    <!-- if 语句在这里结束 -->
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+
 <br><br>
 
 {% if user.is_authenticated %}
-    <form
-            style="display:none;"
-            id="user_delete"
-            action="{% url 'userprofile:delete' user.id %}"
-            method="POST"
-    >
+    <form style="display:none;" id="user_delete" action="{% url 'userprofile:delete' user.id %}" method="POST">
         {% csrf_token %}
         <button type="submit">发送</button>
     </form>

@@ -97,6 +97,7 @@ def profile_edit(request, id):
             profile.phone = profile_cd['phone']
             profile.bio = profile_cd['bio']
             profile.qq = profile_cd['qq']
+            profile.wechat = profile_cd['wechat']
             profile.net = profile_cd['net']
             if 'avatar' in request.FILES:
                 profile.avatar = profile_cd["avatar"]
