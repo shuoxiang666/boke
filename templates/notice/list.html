@@ -23,7 +23,7 @@
                     </span>
                         在 <span style="color: #01a252;">{{ notice.target }}</span> {{ notice.verb }}。
                     </a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ notice.timestamp|date: "Y/m/d H:i" }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ notice.timestamp|date:"Y/m/d H:M" }}
                 </li>
             {% endfor %}
         </ul>

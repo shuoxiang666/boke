@@ -3,6 +3,7 @@ from .models import Friend, SiteMessage, Timeline
 from .models import Message
 from .forms import MessageForm
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -28,6 +29,7 @@ def timeline(request):
     return render(request, "other/timeline.html", contaxt)
 
 
+@login_required(login_url='/userprofile/login/')
 def message_board(request):
     if request.method == 'POST':
         form = MessageForm(request.POST)

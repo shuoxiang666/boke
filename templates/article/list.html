@@ -11,90 +11,94 @@
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
 
-<!-- 定义放置文章标题的div容器 -->
-<div class="container">
-    <div class="row">
+    <!-- 定义放置文章标题的div容器 -->
     <div class="container">
-    <div class="col-8">
-    <!-- 面包屑导航 -->
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{% url 'article:article_list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}">
-                    最新
-                </a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="{% url 'article:article_list' %}?order=total_views&search={{ search }}&column={{ column }}&tag={{ tag }}">
-                    最热
-                </a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="{% url 'article:article_list' %}?order=likes&search={{ search }}&column={{ column }}&tag={{ tag }}">
-                    喜欢
-                </a>
-            </li>
-        </ol>
-    </nav>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-        <div class="card hvr-glow rounded">
-            <div class="card-body">
-                <p class="card-title text-muted">
-                    <i class="zi zi_bell" zico="铃铛" style="color: deepskyblue;"></i> 博主动态
-                </p>
-                啊啊啊啊啊啊啊啊<br>
-
-                <p class="cark-text card-title text-muted mb-0 text-right">2024/4/18</p>
-            </div>
-        </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card hvr-glow rounded">
-            <div class="card-body">
-                <p class="card-title text-muted">
-                    <i class="zi zi_tmGithubsquare" zico="githubsquare"></i> 网站仓库地址
-                </p>
-                <a class="cark-text card-title text-muted mb-0 no-underline" href="https://www.github.com/shuoxiang666/boke">WANG的个人网站源码</a>
-            </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    <!-- 搜索提示语 -->
-    {% if search %}
-        {% if articles %}
-            <h4><span style="color: red">"{{ search }}"</span>的搜索结果如下：</h4>
-            <hr>        
-        {% else %}
-            <h4>暂无<span style="color: red">"{{ search }}"</span>有关的文章。</h4>
-            <hr>
-        {% endif %}
-    {% endif %}
-        
-    <!-- 列表循环 -->
-    <div class="row mt-2">
-        {% for article in articles %}
-            <!-- 文章内容 -->
-            
-            <!-- 标题图 -->
-            {% if article.avatar %}
-                <div class="col-3">
-                    <img src="{{ article.avatar.url }}" 
-                         alt="avatar" 
-                         style="max-width:100%; border-radius: 20px"
-                    >
+        <div class="row">
+            <div class="container">
+                <div class="col-8">
+                    <!-- 面包屑导航 -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'article:article_list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}">
+                                    最新
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'article:article_list' %}?order=total_views&search={{ search }}&column={{ column }}&tag={{ tag }}">
+                                    最热
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'article:article_list' %}?order=likes&search={{ search }}&column={{ column }}&tag={{ tag }}">
+                                    喜欢
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'article:article_create' %}">发布帖子</a>
+                            </li>
+                        </ol>
+                    </nav>
                 </div>
-            {% endif %}
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="card hvr-glow rounded">
+                            <div class="card-body">
+                                <p class="card-title text-muted">
+                                    <i class="zi zi_bell" zico="铃铛" style="color: deepskyblue;"></i> 博主动态
+                                </p>
+                                大家踊跃发帖！！<br>
 
-            <div class="col">
-                <!-- 栏目 -->
-                {% if article.column %}
-                    <a  role="button" 
-                        href="{% url 'article:article_list' %}?column={{ article.column.id }}"
-                        class="btn btn-sm mb-2
+                                <p class="cark-text card-title text-muted mb-0 text-right">2024/4/29</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card hvr-glow rounded">
+                            <div class="card-body">
+                                <p class="card-title text-muted">
+                                    <i class="zi zi_tmGithubsquare" zico="githubsquare"></i> 网站仓库地址
+                                </p>
+                                <a class="cark-text card-title text-muted mb-0 no-underline"
+                                   href="https://www.github.com/shuoxiang666/boke">我的个人网站源码</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 搜索提示语 -->
+        {% if search %}
+            {% if articles %}
+                <h4><span style="color: red">"{{ search }}"</span>的搜索结果如下：</h4>
+                <hr>
+            {% else %}
+                <h4>暂无<span style="color: red">"{{ search }}"</span>有关的文章。</h4>
+                <hr>
+            {% endif %}
+        {% endif %}
+
+        <!-- 列表循环 -->
+        <div class="row mt-2">
+            {% for article in articles %}
+                <!-- 文章内容 -->
+
+                <!-- 标题图 -->
+                {% if article.avatar %}
+                    <div class="col-3">
+                        <img src="{{ article.avatar.url }}"
+                             alt="avatar"
+                             style="max-width:100%; border-radius: 20px"
+                        >
+                    </div>
+                {% endif %}
+
+                <div class="col">
+                    <!-- 栏目 -->
+                    {% if article.column %}
+                        <a role="button"
+                           href="{% url 'article:article_list' %}?column={{ article.column.id }}"
+                           class="btn btn-sm mb-2
                             {% if article.column.title == '闲聊' %}
                                 btn-success
                             {% elif article.column.title == '编程' %}
@@ -107,113 +111,157 @@
                                 btn-danger
                             {% endif %}
                         "
-                    >
-                        {{ article.column }}
-                    </a>
-                {% endif %}
+                        >
+                            {{ article.column }}
+                        </a>
+                    {% endif %}
 
-                <!-- 标签 -->
-                <span>
+                    <!-- 标签 -->
+                    <span>
                     {% for tag in article.tags.all %}
                         <a href="{% url 'article:article_list' %}?tag={{ tag }}"
-                           class="badge badge-secondary" 
+                           class="badge badge-secondary"
                         >
                             {{ tag }}
                         </a>
                     {% endfor %}
                 </span>
 
-                <!-- 标题 -->
-                <h4>
-                    <b>
-                        <a href="{% url 'article:article_detail' article.id %}"
-                           style="color: black;" 
-                        >
-                            {% if article.belongs %}
-                            {{ article.belongs }}:
-                            {% endif %}
-                            {{ article.title }}
-                        </a>
-                    </b>
-                </h4>
-                <!-- 摘要 -->
-                <div>
-                    <p style="color: gray;">
-                        {{ article.main|slice:'100' }}...
-                    </p>
-                </div>
-                <!-- 注脚 -->
-                <p>
-                    <!-- 附加信息 -->
-                    <span>
+                    <!-- 标题 -->
+                    <h4>
+                        <b>
+                            <a href="{% url 'article:article_detail' article.id %}"
+                               style="color: black;"
+                            >
+                                {% if article.belongs %}
+                                    {{ article.belongs }}:
+                                {% endif %}
+                                {{ article.title }}
+                            </a>
+                        </b>
+                    </h4>
+                    <!-- 摘要 -->
+                    <div>
+                        <p style="color: gray;">
+                            {{ article.main|slice:'100' }}...
+                        </p>
+                    </div>
+                    <!-- 注脚 -->
+                    <p>
+                        <!-- 附加信息 -->
+                        <span>
                         <i class="zi zi_eye" zico="眼睛" style="color: rgb(49, 143, 202);"></i>
                         {{ article.total_views }}&nbsp;&nbsp;&nbsp;
                     </span>
-                    <span>
+                        <span>
                         <i class="zi zi_commentalt" zico="评论列表" style="color: yellowgreen;"></i>
-                        <!-- 修改为评论的计数 -->
+                            <!-- 修改为评论的计数 -->
                         {{ article.comments.count }}&nbsp;&nbsp;&nbsp;
                     </span>
-                    <span>
+                        <span>
                         <i class="zi zi_love" zico="爱心" style="color: brown;"></i>
                         {{ article.likes }}&nbsp;&nbsp;&nbsp;
                     </span>
-                    <span>
+                        <span>
                         <i class="zi zi_clock" zico="时钟" style="color: rgb(170, 58, 105);"></i>
                         {{ article.created | timesince_zh }}&nbsp;&nbsp;&nbsp;
                     </span>
-                    {% if article.belongs %}
-                    <span>
+                        {% if article.belongs %}
+                            <span>
                         <i class="zi zi_book" zico="书籍" style="color: burlywood;"></i>
                         {{ article.belongs }}&nbsp;&nbsp;&nbsp;
                     </span>
-                    {% endif %}
-                </p>
-            </div>
-            <hr style="width: 100%;"/>
-        {% endfor %}
+                        {% endif %}
+                    </p>
+                </div>
+                <hr style="width: 100%;"/>
+            {% endfor %}
     </div>
+    <script>
+        // 在此添加你的JavaScript代码
+        // 例如：给图片添加悬停效果等
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("页面加载完成");
+            // 添加页面加载时的动画效果
+            animatePage();
+        });
 
-    <!-- 页码导航 -->
-    <div class="pagination row">
-        <div class="m-auto">
-            <span class="step-links">
-                <!-- 如果不是第一页，则显示上翻按钮 -->
-                {% if articles.has_previous %}
-                    <a href="?page=1&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}" class="btn btn-success">
-                        &laquo; 1
-                    </a>
-                    <span>...</span>
-                    <a href="?page={{ articles.previous_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}" 
-                       class="btn btn-secondary"
-                    >
-                        {{ articles.previous_page_number }}
-                    </a>
-                {% endif %}
+        function animatePage() {
+            // 添加页面加载时的动画效果
+            const elements = document.querySelectorAll('.animate-me');
+            elements.forEach(element => {
+                element.classList.add('fadeInUp');
+            });
+        }
+    </script>
 
-                <!-- 当前页面 -->
-                <span class="current btn btn-danger btn-lg">
-                    {{ articles.number }}
-                </span>
+    <!-- CSS样式 -->
+    <style>
+        /* 在此添加你的CSS样式 */
+        /* 例如：自定义颜色、字体大小等 */
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
 
-                <!-- 如果不是最末页，则显示下翻按钮 -->
-                {% if articles.has_next %}
-                    <a href="?page={{ articles.next_page_number }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}"
-                       class="btn btn-secondary"
-                    >
-                        {{ articles.next_page_number }}
-                    </a>
-                    <span>...</span>
-                    <a href="?page={{ articles.paginator.num_pages }}&order={{ order }}&search={{ search }}&column={{ column }}&tag={{ tag }}"
-                       class="btn btn-success"
-                    >
-                        {{ articles.paginator.num_pages }} &raquo;
-                    </a>
-                {% endif %}
-            </span>
-        </div>
-    </div>
+        .container {
+            margin-top: 0px;
+        }
 
-</div>
+        .card {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #343a40;
+        }
+
+        .animate-me {
+            opacity: 0;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        .fadeInUp {
+            animation-name: fadeInUp;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 
 {% endblock content %}

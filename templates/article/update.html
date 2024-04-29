@@ -1,10 +1,14 @@
-{% extends "base.html" %} {% load staticfiles %}
-{% block title %} 更新文章：{{ article.title }} {% endblock title %}
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    更新文章：{{ article.title }}
+{% endblock title %}
+
 {% block content %}
-<div class="container">
+<div class="container mt-5">
     <div class="row">
-        <div class="col-12">
-            <br>
+        <div class="col-md-8 offset-md-2">
             <form method="post" action=".">
                 {% csrf_token %}
                 <div class="form-group">
@@ -12,35 +16,28 @@
                     <input type="text" class="form-control" id="title" name="title" value="{{ article.title }}">
                 </div>
                 <div class="form-group">
-                <label for="column">栏目</label>
-                <select class="form-control" 
-                    id="column" 
-                    name="column"
-                >
-                <option value="none">请选择栏目..</option>
-                {% for column in columns %}
-                <option value="{{ column.id }}"
-                    {% if column.id == article.column.id %}
-                        selected
-                    {% endif %}
-                >
-                    {{ column }}
-                </option>
-                {% endfor %}
-                </select>
-                <!-- 文章标签 -->
-    <div class="form-group">
-        <label for="tags">标签</label>
-        <input type="text" 
-               class="form-control col-3" 
-               id="tags" 
-               name="tags"
-        >
-    </div>
-    <div class="form-group">
-        <label for="belongs">所属教程</label>
-        <input type="text" class="form-control" id="belongs" name="belongs" value="{{ article.belongs }}">
-    </div>
+                    <label for="column">栏目</label>
+                    <select class="form-control" id="column" name="column">
+                        <option value="none">请选择栏目..</option>
+                        {% for column in columns %}
+                        <option value="{{ column.id }}"
+                            {% if column.id == article.column.id %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ column }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tags">标签</label>
+                    <input type="text" class="form-control" id="tags" name="tags">
+                    <small class="form-text text-muted">多个标签用逗号分隔</small>
+                </div>
+                <div class="form-group">
+                    <label for="belongs">所属教程</label>
+                    <input type="text" class="form-control" id="belongs" name="belongs" value="{{ article.belongs }}">
                 </div>
                 <div class="form-group">
                     <label for="main">文章摘要</label>
@@ -50,9 +47,55 @@
                     <label for="body">文章正文</label>
                     <textarea type="text" class="form-control" id="body" name="body" rows="12">{{ article.body }}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">完成</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>完成</button>
             </form>
         </div>
     </div>
 </div>
+
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+    .container {
+        max-width: 800px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-control {
+        border-radius: 0;
+        border-color: #ccc;
+    }
+    label {
+        font-weight: bold;
+    }
+    .btn {
+        border-radius: 0;
+    }
+    /* Additional Styles for Small Devices */
+    @media (max-width: 576px) {
+        .offset-md-2 {
+            margin-left: 0;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const titleInput = document.getElementById('title');
+        const submitBtn = document.getElementById('submitBtn');
+
+        titleInput.addEventListener('input', function() {
+            if (titleInput.value.trim() !== '') {
+                submitBtn.removeAttribute('disabled');
+            } else {
+                submitBtn.setAttribute('disabled', 'disabled');
+            }
+        });
+    });
+</script>
+
 {% endblock content %}

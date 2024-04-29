@@ -6,86 +6,234 @@
 {% endblock title %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <img src="{% static 'img/about.jpg' %}" alt="about" class="img-fluid rounded mb-3">
-                    <h2 class="card-title text-uppercase font-weight-bold">WANG</h2>
-                    <p class="card-text">大家好，我是WANG，Python爱好者一名，欢迎来到我的博客。</p>
-                </div>
-            </div>
-
-            <div class="card mt-4 border-0 shadow-sm">
-                <div class="card-body">
-                    <h2 class="card-title text-uppercase font-weight-bold">技能</h2>
-                    <div class="progress mb-3">
-                        <div class="progress-bar bg-primary" style="width:60%;">Python</div>
-                        <div class="progress-bar bg-warning" style="width:20%;">Html</div>
-                        <div class="progress-bar bg-info" style="width:10%;">JavaScript</div>
-                        <div class="progress-bar bg-success" style="width:10%;">Css</div>
-                    </div>
-                    <h2 class="card-title text-uppercase font-weight-bold mt-4">学习能力</h2>
-                    <div class="progress mb-3">
-                        <div class="progress-bar bg-primary" style="width:25%;">数学</div>
-                        <div class="progress-bar bg-warning" style="width:30%;">英语</div>
-                        <div class="progress-bar bg-info" style="width:25%;">语文</div>
-                        <div class="progress-bar bg-success" style="width:8%;">音体美</div>
-                        <div class="progress-bar bg-secondary" style="width:12%;">其他</div>
-                    </div>
-                    <h2 class="card-title text-uppercase font-weight-bold mt-4">闲暇</h2>
-                    <div class="progress mb-3">
-                        <div class="progress-bar bg-primary" style="width:40%;">编程</div>
-                        <div class="progress-bar bg-warning" style="width:30%;">看书</div>
-                        <div class="progress-bar bg-info" style="width:20%;">运动</div>
-                        <div class="progress-bar bg-secondary" style="width:10%;">其他</div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="lunbo">
+                            <img src="{% static 'img/about.jpg' %}" id="img" alt="about"
+                                 class="img-fluid rounded mb-3 active">
+                            <p class="lp"></p>
+                        </div>
+                        <h2 class="card-title text-uppercase font-weight-bold"> </h2>
+                        <p class="card-text">大家好，我是WANG，Python爱好者一名，欢迎来到我的网站。</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="card mt-4 border-0 shadow-sm">
-                <div class="card-body">
-                    <h2 class="card-title text-uppercase font-weight-bold">联系方式</h2>
-                    <p class="card-text">
-                        <i class="zi zi_tmQq text-primary" style="font-size: 1.2rem;"></i> 1151471829<br>
-                        <i class="zi zi_phone text-primary" style="font-size: 1.2rem;"></i> 15390312878<br>
-                        <i class="zi zi_tmGithub text-primary" style="font-size: 1.2rem;"></i> <a href="https://www.github.com/shuoxiang666" target="_blank">https://www.github.com/shuoxiang666</a><br>
-                        <i class="zi zi_envelope text-primary" style="font-size: 1.2rem;"></i> 1151471829@qq.com<br>
-                        <i class="zi zi_tmWeibo text-primary" style="font-size: 1.2rem;"></i> @无忧小满_
-                    </p>
+                <div class="card mt-4 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title text-uppercase font-weight-bold">技能</h2>
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-primary" style="width:60%;">Python</div>
+                            <div class="progress-bar bg-warning" style="width:20%;">Html</div>
+                            <div class="progress-bar bg-info" style="width:10%;">JavaScript</div>
+                            <div class="progress-bar bg-success" style="width:10%;">Css</div>
+                        </div>
+                        <h2 class="card-title text-uppercase font-weight-bold mt-4">学习能力</h2>
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-primary" style="width:25%;">数学</div>
+                            <div class="progress-bar bg-warning" style="width:30%;">英语</div>
+                            <div class="progress-bar bg-info" style="width:25%;">语文</div>
+                            <div class="progress-bar bg-success" style="width:8%;">音体美</div>
+                            <div class="progress-bar bg-secondary" style="width:12%;">其他</div>
+                        </div>
+                        <h2 class="card-title text-uppercase font-weight-bold mt-4">闲暇</h2>
+                        <div class="progress mb-3">
+                            <div class="progress-bar bg-primary" style="width:40%;">编程</div>
+                            <div class="progress-bar bg-warning" style="width:30%;">看书</div>
+                            <div class="progress-bar bg-info" style="width:20%;">运动</div>
+                            <div class="progress-bar bg-secondary" style="width:10%;">其他</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card mt-4 border-0 shadow-sm">
-                <div class="card-body">
-                    <h2 class="card-title text-uppercase font-weight-bold">个人简介</h2>
-                    <p class="card-text">喜欢记录生活，喜欢美景，热爱自然。</p>
+                <div class="card mt-4 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title text-uppercase font-weight-bold">联系方式</h2>
+                        <p class="card-text">
+                            <svg t="1714361775516" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2901" width="32" height="32"><path d="M721.470952 470.273089c4.394674-17.578697 7.325139-35.157394 7.325139-55.666555 0-117.191995-96.682834-212.408574-213.874829-212.408574-117.191995 0-213.874829 95.218624-213.874829 212.408574 0 19.042907 2.930464 36.621604 7.325139 52.736091-23.437581 11.719813-49.805627 46.877207-64.455904 92.288159-17.578697 60.06123-10.253558 117.191995 17.578697 125.981343 16.114487 4.394674 35.157394-5.858884 51.271881-26.368046 8.789349 17.578697 19.042907 35.157394 32.22693 51.271881-33.693184 8.789349-57.130765 29.29851-57.130765 52.736091 0 33.693184 46.877207 61.52544 104.007972 61.52544 42.482533 0 80.568346-16.114487 95.218624-38.087858 10.253558 1.46421 19.042907 2.930464 27.832255 2.930464 8.789349 0 17.578697-1.46421 27.832255-2.930464 14.648233 21.973371 52.736091 38.087858 95.218624 38.087858 57.130765 0 104.007972-27.832255 104.007972-61.52544 0-23.437581-23.437581-43.946743-57.130765-52.736091 11.719813-14.648233 21.973371-30.76272 30.76272-46.877207 14.648233 17.578697 32.22693 26.368046 46.877207 21.973371 27.832255-8.789349 35.157394-65.920114 17.578697-125.981343C765.417694 517.148251 743.444323 483.457112 721.470952 470.273089z" fill="#595757" p-id="2902"></path><path d="M873.818296 150.926079C781.530137 58.63792 652.620374 1.507154 511.990798 1.507154S242.451459 58.63792 150.163299 150.926079C57.87514 243.214238 0.744375 372.124001 0.744375 512.753577c0 142.093786 57.130765 269.539339 149.418925 361.827498 92.288159 92.288159 221.197922 149.418925 361.827498 149.418925s269.539339-57.130765 361.827498-149.418925c92.288159-92.288159 149.418925-219.733713 149.418925-361.827498C1023.23722 372.124001 966.106455 243.214238 873.818296 150.926079zM831.337808 832.100588c-82.034601 82.034601-194.829877 133.304437-319.344966 133.304437s-237.31241-51.271881-319.344966-133.304437c-82.034601-80.568346-133.304437-194.829877-133.304437-319.344966s51.271881-237.31241 133.304437-319.344966 194.829877-133.304437 319.344966-133.304437 237.31241 51.271881 319.344966 133.304437 133.304437 194.829877 133.304437 319.344966S913.370364 751.532241 831.337808 832.100588z" fill="#595757" p-id="2903"></path></svg>
+                            </i> QQ:1151471829<br>
+                            <svg t="1714361745367" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1863" width="32" height="32"><path d="M352.814545 385.396364m-33.512727 0a33.512727 33.512727 0 1 0 67.025455 0 33.512727 33.512727 0 1 0-67.025455 0Z" fill="#50B674" p-id="1864"></path><path d="M502.690909 384.465455m-33.512727 0a33.512727 33.512727 0 1 0 67.025454 0 33.512727 33.512727 0 1 0-67.025454 0Z" fill="#50B674" p-id="1865"></path><path d="M576.232727 534.341818m-23.272727 0a23.272727 23.272727 0 1 0 46.545455 0 23.272727 23.272727 0 1 0-46.545455 0Z" fill="#50B674" p-id="1866"></path><path d="M694.458182 536.203636m-23.272727 0a23.272727 23.272727 0 1 0 46.545454 0 23.272727 23.272727 0 1 0-46.545454 0Z" fill="#50B674" p-id="1867"></path><path d="M512 0C229.003636 0 0 229.003636 0 512s229.003636 512 512 512 512-229.003636 512-512S794.996364 0 512 0z m-87.505455 630.225455c-26.996364 0-48.407273-5.585455-75.403636-11.17091l-75.403636 37.236364 21.410909-64.232727c-53.992727-37.236364-85.643636-85.643636-85.643637-145.221818 0-102.4 96.814545-182.458182 215.04-182.458182 105.192727 0 198.283636 64.232727 216.901819 150.807273-6.516364-0.930909-13.963636-0.930909-20.48-0.93091-102.4 0-182.458182 76.334545-182.458182 170.356364 0 15.825455 2.792727 30.72 6.516363 44.683636-7.447273 0-13.963636 0.930909-20.48 0.93091z m314.647273 75.403636l15.825455 53.992727-58.647273-32.581818c-21.410909 5.585455-42.821818 11.170909-64.232727 11.170909-102.4 0-182.458182-69.818182-182.458182-155.461818s80.058182-155.461818 182.458182-155.461818c96.814545 0 182.458182 69.818182 182.458182 155.461818 0 47.476364-31.650909 90.298182-75.403637 122.88z" fill="#50B674" p-id="1868"></path></svg>
+                             电话：15390312878<br>
+                            <svg t="1714361815771" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3930" width="32" height="32"><path d="M64 512c0 195.2 124.8 361.6 300.8 422.4 22.4 6.4 19.2-9.6 19.2-22.4v-76.8c-134.4 16-140.8-73.6-150.4-89.6-19.2-32-60.8-38.4-48-54.4 32-16 64 3.2 99.2 57.6 25.6 38.4 76.8 32 105.6 25.6 6.4-22.4 19.2-44.8 35.2-60.8-144-22.4-201.6-108.8-201.6-211.2 0-48 16-96 48-131.2-22.4-60.8 0-115.2 3.2-121.6 57.6-6.4 118.4 41.6 124.8 44.8 32-9.6 70.4-12.8 112-12.8 41.6 0 80 6.4 112 12.8 12.8-9.6 67.2-48 121.6-44.8 3.2 6.4 25.6 57.6 6.4 118.4 32 38.4 48 83.2 48 131.2 0 102.4-57.6 188.8-201.6 214.4 22.4 22.4 38.4 54.4 38.4 92.8v112c0 9.6 0 19.2 16 19.2C832 876.8 960 710.4 960 512c0-246.4-201.6-448-448-448S64 265.6 64 512z" fill="#040000" p-id="3931"></path></svg>
+                            <a href="https://www.github.com/shuoxiang666" target="_blank">Github：https://www.github.com/shuoxiang666</a><br>
+                            <svg t="1714361849946" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5001" width="32" height="32"><path d="M838.954667 234.666667H170.666667c-3.626667 0-7.168 0.448-10.56 1.322666l323.690666 323.669334a21.333333 21.333333 0 0 0 30.165334 0L838.954667 234.666667z m46.144 14.186666l-260.693334 260.693334 262.933334 262.912c5.44-7.168 8.661333-16.106667 8.661333-25.792V277.333333c0-10.944-4.117333-20.906667-10.88-28.48zM843.861333 789.333333l-249.6-249.621333-50.133333 50.133333a64 64 0 0 1-90.517333 0l-50.112-50.133333L156.373333 786.88c4.48 1.578667 9.28 2.453333 14.314667 2.453333h673.194667zM128.661333 754.218667L373.333333 509.525333 129.578667 265.813333A42.709333 42.709333 0 0 0 128 277.333333v469.333334c0 2.56 0.213333 5.098667 0.661333 7.552zM170.666667 192h682.666666a85.333333 85.333333 0 0 1 85.333334 85.333333v469.333334a85.333333 85.333333 0 0 1-85.333334 85.333333H170.666667a85.333333 85.333333 0 0 1-85.333334-85.333333V277.333333a85.333333 85.333333 0 0 1 85.333334-85.333333z" fill="#333333" p-id="5002"></path></svg>
+                             邮箱：1151471829@qq.com<br>
+                            <svg t="1714361873885" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6084" width="32" height="32"><path d="M851.4 590.193c-22.196-66.233-90.385-90.422-105.912-91.863-15.523-1.442-29.593-9.94-19.295-27.505 10.302-17.566 29.304-68.684-7.248-104.681-36.564-36.14-116.512-22.462-173.094 0.866-56.434 23.327-53.39 7.055-51.65-8.925 1.89-16.848 32.355-111.02-60.791-122.395C311.395 220.86 154.85 370.754 99.572 457.15 16 587.607 29.208 675.873 29.208 675.873h0.58c10.009 121.819 190.787 218.869 412.328 218.869 190.5 0 350.961-71.853 398.402-169.478 0 0 0.143-0.433 0.575-1.156 4.938-10.506 8.71-21.168 11.035-32.254 6.668-26.205 11.755-64.215-0.728-101.66z m-436.7 251.27c-157.71 0-285.674-84.095-285.674-187.768 0-103.671 127.82-187.76 285.674-187.76 157.705 0 285.673 84.089 285.673 187.76 0 103.815-127.968 187.768-285.673 187.768z" fill="#E71F19" p-id="6085"></path><path d="M803.096 425.327c2.896 1.298 5.945 1.869 8.994 1.869 8.993 0 17.7-5.328 21.323-14.112 5.95-13.964 8.993-28.793 8.993-44.205 0-62.488-51.208-113.321-114.181-113.321-15.379 0-30.32 3.022-44.396 8.926-11.755 4.896-17.263 18.432-12.335 30.24 4.933 11.662 18.572 17.134 30.465 12.238 8.419-3.46 17.268-5.33 26.41-5.33 37.431 0 67.752 30.241 67.752 67.247 0 9.068-1.735 17.857-5.369 26.202a22.832 22.832 0 0 0 12.335 30.236l0.01 0.01z" fill="#F5AA15" p-id="6086"></path><path d="M726.922 114.157c-25.969 0-51.65 3.744-76.315 10.942-18.423 5.472-28.868 24.622-23.5 42.91 5.509 18.29 24.804 28.657 43.237 23.329a201.888 201.888 0 0 1 56.578-8.064c109.253 0 198.189 88.271 198.189 196.696 0 19.436-2.905 38.729-8.419 57.16-5.508 18.289 4.79 37.588 23.212 43.053 3.342 1.014 6.817 1.442 10.159 1.442 14.943 0 28.725-9.648 33.37-24.48 7.547-24.906 11.462-50.826 11.462-77.175-0.143-146.588-120.278-265.813-267.973-265.813z" fill="#F5AA15" p-id="6087"></path><path d="M388.294 534.47c-84.151 0-152.34 59.178-152.34 132.334 0 73.141 68.189 132.328 152.34 132.328 84.148 0 152.337-59.182 152.337-132.328 0-73.15-68.19-132.334-152.337-132.334zM338.53 752.763c-29.454 0-53.39-23.755-53.39-52.987 0-29.228 23.941-52.989 53.39-52.989 29.453 0 53.39 23.76 53.39 52.989 0 29.227-23.937 52.987-53.39 52.987z m99.82-95.465c-6.382 11.086-19.296 15.696-28.726 10.219-9.43-5.323-11.75-18.717-5.37-29.803 6.386-11.09 19.297-15.7 28.725-10.224 9.43 5.472 11.755 18.864 5.37 29.808z" fill="#040000" p-id="6088"></path></svg>
+                            微博：@无忧小满_
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card mt-4 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title text-uppercase font-weight-bold">个人简介</h2>
+                        <p class="card-text">喜欢记录生活，喜欢美景，热爱自然。</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <img src="{% static 'img/1.jpg' %}" alt="image" class="img-fluid rounded">
-                </div>
-                <div class="col-md-12 mb-3">
-                    <img src="{% static 'img/2.jpg' %}" alt="image" class="img-fluid rounded">
-                </div>
-                <div class="col-md-12 mb-3">
-                    <img src="{% static 'img/3.jpg' %}" alt="image" class="img-fluid rounded">
-                </div>
-                <div class="col-md-12 mb-3">
-                    <img src="{% static 'img/4.jpg' %}" alt="image" class="img-fluid rounded">
-                </div>
-                <div class="col-md-12 mb-3">
-                    <img src="{% static 'img/5.jpg' %}" alt="image" class="img-fluid rounded">
-                </div>
-                <div class="col-md-12 mb-3">
-                    <img src="{% static 'img/6.jpg' %}" alt="image" class="img-fluid rounded">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <img src="{% static 'img/1.jpg' %}" alt="image" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <img src="{% static 'img/2.jpg' %}" alt="image" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <img src="{% static 'img/3.jpg' %}" alt="image" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <img src="{% static 'img/4.jpg' %}" alt="image" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <img src="{% static 'img/5.jpg' %}" alt="image" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <img src="{% static 'img/6.jpg' %}" alt="image" class="img-fluid rounded">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <style>
+        .lunbo {
+            position: relative;
+            height: 390px;
+            width: 100%;
+            /* border: 1px solid; */
+            /* margin: 100px auto; */
+        }
+
+        #img {
+            height: 400px;
+            width: 600px;
+            background-size: 100% 100%;
+            /* transition: 0.2s; */
+            transition: 1s linear;
+        }
+
+        .lp {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        .lunbo i {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .lunbo i:nth-child(1) {
+            background-color: white; /* 这行代码设置了第一个<i>元素的背景颜色 */
+        }
+
+        .lunbo i:nth-child(4) {
+            margin-right: 0;
+        }
+    </style>
+
+    <script>
+        let pEle = document.getElementsByClassName("lp")[0];
+        /* 获取事件代理的父元素section */
+        let secEle = document.getElementsByClassName("lunbo")[0];
+
+        let imgArr = [
+
+            "{% static 'img/8.jpg' %}",
+            "{% static 'img/9.jpg' %}",
+            "{% static 'img/10.jpg' %}",
+            "{% static 'img/11.jpg' %}",
+        ];
+        /* 获取时间函数的起始下标 */
+        let i = 0;
+        /* 图片有多少张，就传几个参进去，并且接收这个返回的数组 */
+        let cirArr = creatCircle(imgArr.length);
+        /* 遍历cirArr数组，将圆点添加进它的父节点p节点中 */
+        cirArr.forEach(node => pEle.appendChild(node));
+
+        /* 获取所有的圆点节点 */
+        let iEle = document.getElementsByTagName("i");
+        /* 给每一个圆点添加上自定义属性，并赋上下标 */
+        for (let k = 0; k < iEle.length; k++) {
+            iEle[k].dataset.index = k;
+        }
+
+        let timer;
+
+        /* 轮播：时间函数，3秒自动换一张 */
+        function playTime() {
+            timer = setInterval(() => {
+                /* 循环展示图片 */
+                i++;
+                /* 如果已经跳到最后一张，就再次回到第一张 */
+                if (i > imgArr.length - 1) {
+                    i = 0;
+                }
+                /* 给圆点添加样式，开始运行该函数 */
+                addStyleI(i);
+                /* 图片标签地址（src属性） */
+                img.src = imgArr[i];
+            }, 3000);
+        }
+
+        playTime();
+
+        /* 鼠标移入，图片暂停 */
+        secEle.addEventListener("mouseenter", function () {
+            clearInterval(timer);
+            timer = null;
+        });
+        /* 鼠标移出，图片恢复滚动 */
+        secEle.addEventListener("mouseleave", playTime);
+        secEle.addEventListener("click", function (e) {
+            let event = e || window.event;
+            img.src = imgArr[i];
+            addStyleI(i);
+            /* 点击小圆点可以切换到对应的图片上 */
+            if (event.target.nodeName === "I") {
+                /* 获得点击的圆点的自定义索引值 */
+                cirI = event.target.dataset.index;
+                /* 替换图片 */
+                img.src = imgArr[cirI];
+                /* 更改圆点样式 */
+                addStyleI(cirI);
+                /* 每当点击小圆点，i的值就会被赋成圆点下标的值 */
+                i = cirI;
+            }
+        });
+
+        /* 暂停图片滚动 */
+        function picScroll() {
+            clearInterval(timer);
+        }
+
+        /* 生成点 */
+        function creatCircle(num) {
+            /* 创建一个空数组来接收这个圆点 */
+            let iArr = [];
+            for (let j = 0; j < num; j++) {
+                /* 新增圆点节点 */
+                let circleNode = document.createElement("i");
+                /* 再把新增的圆点节点放进圆点数组中 */
+                iArr.push(circleNode);
+            }
+            /* 完成后，返回该数组 */
+            return iArr;
+        }
+
+        /* 给圆点添加样式 */
+        function addStyleI(index) {
+            /* 圆点的默认颜色是灰色 */
+            [...iEle].forEach(node => node.style.backgroundColor = "gray");
+            /* 当跳到该图片时，圆点变成白色 */
+            iEle[index].style.backgroundColor = "white";
+        }
+    </script>
+
 {% endblock content %}
