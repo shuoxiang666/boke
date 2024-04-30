@@ -2,6 +2,8 @@ import markdown
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
+from taggit.models import Tag
+
 from .models import ArticlePost, ArticleColumn
 from .forms import ArticlePostForm, ColumnForm
 from comment.models import Comment
@@ -121,15 +123,21 @@ def article_update(request, id):
     if request.method == "POST":
         article_post_form = ArticlePostForm(request.POST, instance=article)
         if article_post_form.is_valid():
-            article = article_post_form.save(commit=False)
-            article.save()
+            # 处理标签数据
+            tags_str = article_post_form.cleaned_data['tags']
+            tags_list = [tag.strip() for tag in tags_str.split(',') if tag.strip()]
+            tags_str = ','.join(tags_list)
+            article.tags.set(tags_str)
+
+            article = article_post_form.save()
             return redirect("article:article_detail", id=id)
         else:
             return HttpResponse("表单内容有误，请重新填写。")
     else:
         article_post_form = ArticlePostForm(instance=article)
         columns = ArticleColumn.objects.all()
-        context = {'article': article, 'article_post_form': article_post_form, 'columns': columns}
+        tags = Tag.objects.all()
+        context = {'article': article, 'article_post_form': article_post_form, 'columns': columns, 'tags': tags}
         return render(request, 'article/update.html', context)
 
 

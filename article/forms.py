@@ -10,6 +10,7 @@ class ColumnForm(forms.ModelForm):
 
 
 class ArticlePostForm(forms.ModelForm):  # 编写文章
+    tags = forms.CharField(required=False)
     class Meta:
         # 指明数据模型来源
         model = ArticlePost
