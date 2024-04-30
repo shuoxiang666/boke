@@ -1,5 +1,12 @@
 from django import forms
 from .models import ArticlePost, ArticleColumn
+from .models import ArticleColumn
+
+
+class ColumnForm(forms.ModelForm):
+    class Meta:
+        model = ArticleColumn
+        fields = ['title']  # 在表单中显示的字段
 
 
 class ArticlePostForm(forms.ModelForm):  # 编写文章

@@ -16,7 +16,6 @@
         <div class="row">
             <div class="container">
                 <div class="col-8">
-                    <!-- 面包屑导航 -->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -36,6 +35,9 @@
                             </li>
                             <li class="breadcrumb-item">
                                 <a href="{% url 'article:article_create' %}">发布帖子</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'article:article_create_column' %}">创建栏目</a>
                             </li>
                         </ol>
                     </nav>
@@ -176,92 +178,92 @@
                 </div>
                 <hr style="width: 100%;"/>
             {% endfor %}
-    </div>
-    <script>
-        // 在此添加你的JavaScript代码
-        // 例如：给图片添加悬停效果等
-        document.addEventListener("DOMContentLoaded", function () {
-            console.log("页面加载完成");
-            // 添加页面加载时的动画效果
-            animatePage();
-        });
-
-        function animatePage() {
-            // 添加页面加载时的动画效果
-            const elements = document.querySelectorAll('.animate-me');
-            elements.forEach(element => {
-                element.classList.add('fadeInUp');
+        </div>
+        <script>
+            // 在此添加你的JavaScript代码
+            // 例如：给图片添加悬停效果等
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("页面加载完成");
+                // 添加页面加载时的动画效果
+                animatePage();
             });
-        }
-    </script>
 
-    <!-- CSS样式 -->
-    <style>
-        /* 在此添加你的CSS样式 */
-        /* 例如：自定义颜色、字体大小等 */
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-        }
+            function animatePage() {
+                // 添加页面加载时的动画效果
+                const elements = document.querySelectorAll('.animate-me');
+                elements.forEach(element => {
+                    element.classList.add('fadeInUp');
+                });
+            }
+        </script>
 
-        .container {
-            margin-top: 0px;
-        }
+        <!-- CSS样式 -->
+        <style>
+            /* 在此添加你的CSS样式 */
+            /* 例如：自定义颜色、字体大小等 */
+            body {
+                background-color: #f8f9fa;
+                font-family: Arial, sans-serif;
+            }
 
-        .card {
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease-in-out;
-        }
+            .container {
+                margin-top: 0px;
+            }
 
-        .card:hover {
-            transform: scale(1.05);
-        }
+            .card {
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+                transition: transform 0.3s ease-in-out;
+            }
 
-        .btn {
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: background-color 0.3s ease-in-out;
-        }
+            .card:hover {
+                transform: scale(1.05);
+            }
 
-        .btn-primary {
-            background-color: #007bff;
-            color: #fff;
-        }
+            .btn {
+                padding: 8px 16px;
+                border-radius: 20px;
+                transition: background-color 0.3s ease-in-out;
+            }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
+            .btn-primary {
+                background-color: #007bff;
+                color: #fff;
+            }
 
-        .btn-secondary {
-            background-color: #6c757d;
-            color: #fff;
-        }
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
 
-        .btn-secondary:hover {
-            background-color: #343a40;
-        }
+            .btn-secondary {
+                background-color: #6c757d;
+                color: #fff;
+            }
 
-        .animate-me {
-            opacity: 0;
-            animation-duration: 1s;
-            animation-fill-mode: forwards;
-        }
+            .btn-secondary:hover {
+                background-color: #343a40;
+            }
 
-        .fadeInUp {
-            animation-name: fadeInUp;
-        }
-
-        @keyframes fadeInUp {
-            from {
+            .animate-me {
                 opacity: 0;
-                transform: translateY(50px);
+                animation-duration: 1s;
+                animation-fill-mode: forwards;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .fadeInUp {
+                animation-name: fadeInUp;
             }
-        }
-    </style>
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
 
 {% endblock content %}

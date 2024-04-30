@@ -2,97 +2,101 @@
 {% load staticfiles %}
 {% block title %} 用户信息 {% endblock title %}
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">用户信息编辑</div>
-                <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-md-4 text-md-right">
-                            <label for="username" class="form-label">用户名:</label>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">用户信息编辑</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-4 text-md-right">
+                                <label for="username" class="form-label">用户名:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <p>{{ user.username }}</p>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <p>{{ user.username }}</p>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4 text-md-right">
+                                <label for="avatar" class="form-label">头像:</label>
+                            </div>
+                            <div class="col-md-8">
+                                {% if profile.avatar %}
+                                    <img src="{{ profile.avatar.url }}" class="img-thumbnail rounded-circle"
+                                         style="max-width: 30%;" alt="Avatar">
+                                {% else %}
+                                    <p>暂无头像</p>
+                                {% endif %}
+                            </div>
                         </div>
+                        <form method="post" action="." enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row mb-3">
+                            <div class="col-md-4 text-md-right">
+                                <label for="phone" class="form-label">电话:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                       value="{{ profile.phone }}">
+                            </div>
+                        </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 text-md-right">
+                                    <label for="avatar" class="form-label">上传头像:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="file" class="form-control-file" name="avatar" id="avatar">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 text-md-right">
+                                    <label for="bio" class="form-label">简介:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <textarea type="text" class="form-control" id="bio" name="bio"
+                                              rows="6">{{ profile.bio }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 text-md-right">
+                                    <label for="qq" class="form-label">QQ号:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="qq" name="qq" value="{{ profile.qq }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 text-md-right">
+                                    <label for="wechat" class="form-label">微信号:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="wechat" name="wechat"
+                                           value="{{ profile.wechat }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 text-md-right">
+                                    <label for="net" class="form-label">个人网站:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="net" name="net"
+                                           value="{{ profile.net }}">
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <button type="submit" class="btn btn-primary">保存</button>
+                            </div>
+                        </form>
                     </div>
-
-                    <div class="row mb-3">
-                        <div class="col-md-4 text-md-right">
-                            <label for="avatar" class="form-label">头像:</label>
-                        </div>
-                        <div class="col-md-8">
-                            {% if profile.avatar %}
-                            <img src="{{ profile.avatar.url }}" class="img-thumbnail rounded-circle" style="max-width: 30%;" alt="Avatar">
-                            {% else %}
-                            <p>暂无头像</p>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-md-4 text-md-right">
-                            <label for="phone" class="form-label">电话:</label>
-                        </div>
-                        <div class="col-md-8">
-                            <p>{{ profile.phone }}</p>
-                        </div>
-                    </div>
-
-                    <form method="post" action="." enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="row mb-3">
-                            <div class="col-md-4 text-md-right">
-                                <label for="avatar" class="form-label">上传头像:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="file" class="form-control-file" name="avatar" id="avatar">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-4 text-md-right">
-                                <label for="bio" class="form-label">简介:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <textarea type="text" class="form-control" id="bio" name="bio" rows="6">{{ profile.bio }}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-4 text-md-right">
-                                <label for="qq" class="form-label">QQ号:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="qq" name="qq" value="{{ profile.qq }}">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-4 text-md-right">
-                                <label for="wechat" class="form-label">微信号:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="wechat" name="wechat" value="{{ profile.wechat }}">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-4 text-md-right">
-                                <label for="net" class="form-label">个人网站:</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="net" name="net" value="{{ profile.net }}">
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-center">
-                            <button type="submit" class="btn btn-primary">保存</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
 from .models import ArticlePost, ArticleColumn
-from .forms import ArticlePostForm, ArticleColumnForm
+from .forms import ArticlePostForm, ColumnForm
 from comment.models import Comment
 from comment.forms import CommentForm
 from django.contrib.auth.decorators import login_required
@@ -147,3 +147,15 @@ def article_list_example(request):
     articles = ArticlePost.objects.all()
     context = {'articles': articles}
     return render(request, 'article/list.html', context)
+
+
+@login_required(login_url='/userprofile/login/')
+def create_column(request):
+    if request.method == 'POST':
+        form = ColumnForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('article:article_list')  # 重定向到首页或其他页面
+    else:
+        form = ColumnForm()
+    return render(request, 'article/column.html', {'form': form})

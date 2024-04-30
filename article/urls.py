@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+
 # 正在部署的应用的名称
 app_name = 'article'
 
@@ -10,4 +11,5 @@ urlpatterns = [
     path('article-delete/<int:id>/', views.article_delete, name='article_delete'),
     path('article-update/<int:id>/', views.article_update, name='article_update'),
     path('increase-likes/<int:id>/', views.IncreaseLikesView, name='increase_likes'),
+    path('article-column/', views.create_column, name='article_create_column'),
 ]
