@@ -154,7 +154,10 @@ def article_update(request, id):
             tags_list = [tag.strip() for tag in tags_str.split(',') if tag.strip()]
             tags_str = ','.join(tags_list)
             article.tags.set(tags_str)
-            article = article_post_form.save()
+            # 从表单中获取栏目数据，并更新文章的栏目
+            column_id = request.POST.get('column')
+            article.column_id = column_id
+            article.save()
             return redirect("article:article_detail", id=id)
         else:
             return HttpResponse("表单内容有误，请重新填写。")
@@ -166,6 +169,7 @@ def article_update(request, id):
 
         context = {'article': article, 'article_post_form': article_post_form, 'columns': columns, 'tags': tags}
         return render(request, 'article/update.html', context)
+
 
 
 @login_required(login_url='/userprofile/login/')

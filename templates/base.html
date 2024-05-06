@@ -44,10 +44,7 @@
 <!-- 引入导航栏 -->
 {% include 'header.html' %}
 <!-- 预留具体页面的位置 -->
-<div id="wrapper">
     {% block content %}{% endblock content %}
-    <div id="push"></div>
-</div>
 <!-- 引入注脚 -->
 {% include 'footer.html' %}
 <!-- bootstrap.js 依赖 jquery.js 和popper.js，因此在这里引入 -->
@@ -65,16 +62,6 @@
     html, body {
         height: 100%;
         margin: 0;
-    }
-
-    #wrapper {
-        min-height: 100%;
-        margin-bottom: -60px;
-    }
-
-    #footer,
-    #push {
-        height: 60px;
     }
 </style>
 </body>

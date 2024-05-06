@@ -1,24 +1,43 @@
 <!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
 {% load staticfiles %}
-
 {% block title %}
     Top文章榜单
 {% endblock title %}
-
 {% block content %}
+    <style>
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+        }
+    
+        .charts-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    </style>
     <div class="container">
         <h1 class="text-center mt-5 mb-4">Top Three Posts</h1>
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div id="top-posts-chart" style="height: 400px;"></div>
+            <div class="charts-container">
+                <div class="container-box1" id="top-posts-chart" style="height: 500px; width: 800px;"></div>
+                <div class="container-box2" id="pie-chart" style="height: 400px; width: 800px;"></div>
             </div>
-        </div>
     </div>
     {% block script %}
         <script>
             // 渲染图表函数
-            function renderChart() {
+            function renderCharts() {
+                // 渲染柱状图
+                renderBarChart();
+
+                // 渲染饼状图
+                renderPieChart();
+            }
+
+            // 渲染柱状图
+            function renderBarChart() {
                 // 从 Django 模板中获取 JSON 数据
                 var topPostsData = JSON.parse('{{ top_posts_json|safe }}');
 
@@ -26,11 +45,11 @@
                 var titles = topPostsData.map(post => post.fields.title);
                 var views = topPostsData.map(post => post.fields.total_views);
 
-                // 初始化 ECharts 实例
-                var chart = echarts.init(document.getElementById('top-posts-chart'));
+                // 初始化柱状图 ECharts 实例
+                var barChart = echarts.init(document.getElementById('top-posts-chart'));
 
-                // 指定图表的配置项和数据
-                var option = {
+                // 指定柱状图的配置项和数据
+                var barOption = {
                     title: {
                         text: '热榜前三的文章如下'
                     },
@@ -43,18 +62,83 @@
                     },
                     series: [{
                         data: views,
-                        type: 'bar'
+                        type: 'bar',
+                        label: {
+                            show: true,
+                            position: 'top', // 标签位置：柱子顶部
+                            formatter: '{c}', // 标签格式：显示浏览量
+                            color: '#000' // 标签文字颜色
+                        }
                     }]
                 };
 
-                // 使用刚指定的配置项和数据显示图表
-                chart.setOption(option);
+                // 使用刚指定的配置项和数据显示柱状图
+                barChart.setOption(barOption);
+            }
+
+            // 渲染饼状图
+            function renderPieChart() {
+                // 从 Django 模板中获取 JSON 数据
+                var topPostsData = JSON.parse('{{ top_posts_json|safe }}');
+
+                // 从 QuerySet 中提取文章标题和浏览量数据
+                var titles = topPostsData.map(post => post.fields.title);
+                var views = topPostsData.map(post => post.fields.total_views);
+
+                // 计算总浏览量
+                var totalViews = views.reduce((a, b) => a + b, 0);
+
+                // 计算每篇文章的访问量占比
+                var data = views.map(view => ({
+                    name: titles[views.indexOf(view)],
+                    value: (view / totalViews * 100).toFixed(2)
+                }));
+
+                // 初始化饼状图 ECharts 实例
+                var pieChart = echarts.init(document.getElementById('pie-chart'));
+
+                // 指定饼状图的配置项和数据
+                var pieOption = {
+                    title: {
+                        text: '访问量前三的文章访问量占比'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b}: {c}%'
+                    },
+                    series: [
+                        {
+                            name: '访问量占比',
+                            type: 'pie',
+                            radius: ['50%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                show: true,
+                                position: 'outside',
+                                formatter: '{b}: {d}%'
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            },
+                            labelLine: {
+                                show: true
+                            },
+                            data: data
+                        }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示饼状图
+                pieChart.setOption(pieOption);
             }
 
             // 调用函数以在页面加载时渲染图表
-            renderChart();
+            renderCharts();
         </script>
-
     {% endblock script %}
 {% endblock content %}
 

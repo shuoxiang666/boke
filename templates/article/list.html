@@ -1,58 +1,54 @@
-<!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load my_filters_and_tags %}
 
-<!-- 写入 base.html 中定义的 title -->
 {% block title %}
-    WANG的编程空间
+    个人博客
 {% endblock title %}
 
-<!-- 写入 base.html 中定义的 content -->
 {% block content %}
-
-    <!-- 定义放置文章标题的div容器 -->
     <div class="container">
         <div class="row">
             <div class="container">
                 <div class="col-8">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
+                    <nav aria-label="breadcrumb" style="background-color: transparent;">
+                        <ol class="breadcrumb" style="background-color: transparent;">
                             <li class="breadcrumb-item">
-                                <a href="{% url 'article:article_list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}">
+                                <a href="{% url 'article:article_list' %}?search={{ search }}&column={{ column }}&tag={{ tag }}"
+                                   style="color: black;">
                                     最新
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{% url 'article:article_list' %}?order=total_views&search={{ search }}&column={{ column }}&tag={{ tag }}">
+                                <a href="{% url 'article:article_list' %}?order=total_views&search={{ search }}&column={{ column }}&tag={{ tag }}"
+                                   style="color: black;">
                                     最热
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{% url 'article:article_create' %}">发布帖子</a>
+                                <a href="{% url 'article:article_create' %}" style="color: black;">发布帖子</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{% url 'article:article_create_column' %}">创建栏目</a>
+                                <a href="{% url 'article:article_create_column' %}" style="color: black;">创建栏目</a>
                             </li>
                         </ol>
                     </nav>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">
-                        <div class="card hvr-glow rounded">
-                            <div class="card-body">
+                        <div class="card hvr-glow rounded" style="background-color: transparent;">
+                            <div class="card-body" style="background-color: transparent;">
                                 <p class="card-title text-muted">
                                     <i class="zi zi_bell" zico="铃铛" style="color: deepskyblue;"></i> 博主动态
                                 </p>
                                 大家踊跃发帖！！<br>
-
                                 <p class="cark-text card-title text-muted mb-0 text-right">2024/4/29</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="card hvr-glow rounded">
-                            <div class="card-body">
+                        <div class="card hvr-glow rounded" style="background-color: transparent;">
+                            <div class="card-body" style="background-color: transparent;">
                                 <p class="card-title text-muted">
                                     <i class="zi zi_tmGithubsquare" zico="githubsquare"></i> 网站仓库地址
                                 </p>
@@ -64,7 +60,6 @@
                 </div>
             </div>
         </div>
-        <!-- 搜索提示语 -->
         {% if search %}
             {% if articles %}
                 <h4><span style="color: red">"{{ search }}"</span>的搜索结果如下：</h4>
@@ -75,12 +70,8 @@
             {% endif %}
         {% endif %}
 
-        <!-- 列表循环 -->
         <div class="row mt-2">
             {% for article in articles %}
-                <!-- 文章内容 -->
-
-                <!-- 标题图 -->
                 {% if article.avatar %}
                     <div class="col-3">
                         <img src="{{ article.avatar.url }}"
@@ -91,20 +82,19 @@
                 {% endif %}
 
                 <div class="col">
-                    <!-- 栏目 -->
                     {% if article.column %}
                         <a role="button"
                            href="{% url 'article:article_list' %}?column={{ article.column.id }}"
                            class="btn btn-sm mb-2
-                            {% if article.column.title == '闲聊' %}
+                            {% if article.column.title == '优秀作品集' %}
                                 btn-success
-                            {% elif article.column.title == '编程' %}
+                            {% elif article.column.title == '生活瞬间' %}
                                 btn-primary
-                            {% elif article.column.title == '学习' %}
+                            {% elif article.column.title == '文学' %}
                                 btn-warning
                             {% elif article.column.title == '其他' %}
                                 btn-secondary
-                            {% elif article.column.title == '动态' %}
+                            {% elif article.column.title == '小说' %}
                                 btn-danger
                             {% endif %}
                         "
@@ -113,18 +103,16 @@
                         </a>
                     {% endif %}
 
-                    <!-- 标签 -->
                     <span>
-                    {% for tag in article.tags.all %}
-                        <a href="{% url 'article:article_list' %}?tag={{ tag }}"
-                           class="badge badge-secondary"
-                        >
-                            {{ tag }}
-                        </a>
-                    {% endfor %}
-                </span>
+                        {% for tag in article.tags.all %}
+                            <a href="{% url 'article:article_list' %}?tag={{ tag }}"
+                               class="badge badge-secondary"
+                            >
+                                {{ tag }}
+                            </a>
+                        {% endfor %}
+                    </span>
 
-                    <!-- 标题 -->
                     <h4>
                         <b>
                             <a href="{% url 'article:article_detail' article.id %}"
@@ -137,124 +125,117 @@
                             </a>
                         </b>
                     </h4>
-                    <!-- 摘要 -->
+
                     <div>
                         <p style="color: gray;">
                             {{ article.main|slice:'100' }}...
                         </p>
                     </div>
-                    <!-- 注脚 -->
+
                     <p>
-                        <!-- 附加信息 -->
                         <span>
-                        <i class="zi zi_eye" zico="眼睛" style="color: rgb(49, 143, 202);"></i>
-                        {{ article.total_views }}&nbsp;&nbsp;&nbsp;
-                    </span>
+                            <i class="zi zi_eye" zico="眼睛" style="color: rgb(49, 143, 202);"></i>
+                            {{ article.total_views }}&nbsp;&nbsp;&nbsp;
+                        </span>
                         <span>
-                        <i class="zi zi_commentalt" zico="评论列表" style="color: yellowgreen;"></i>
-                            <!-- 修改为评论的计数 -->
-                        {{ article.comments.count }}&nbsp;&nbsp;&nbsp;
-                    </span>
+                            <i class="zi zi_commentalt" zico="评论列表" style="color: yellowgreen;"></i>
+                            {{ article.comments.count }}&nbsp;&nbsp;&nbsp;
+                        </span>
                         <span>
-                        <i class="zi zi_clock" zico="时钟" style="color: rgb(170, 58, 105);"></i>
-                        {{ article.created | timesince_zh }}&nbsp;&nbsp;&nbsp;
-                    </span>
+                            <i class="zi zi_clock" zico="时钟" style="color: rgb(170, 58, 105);"></i>
+                            {{ article.created | timesince_zh }}&nbsp;&nbsp;&nbsp;
+                        </span>
                         {% if article.belongs %}
                             <span>
-                        <i class="zi zi_book" zico="书籍" style="color: burlywood;"></i>
-                        {{ article.belongs }}&nbsp;&nbsp;&nbsp;
-                    </span>
+                                <i class="zi zi_book" zico="书籍" style="color: burlywood;"></i>
+                                {{ article.belongs }}&nbsp;&nbsp;&nbsp;
+                            </span>
                         {% endif %}
                     </p>
                 </div>
+
                 <hr style="width: 100%;"/>
             {% endfor %}
         </div>
-        <script>
-            // 在此添加你的JavaScript代码
-            // 例如：给图片添加悬停效果等
-            document.addEventListener("DOMContentLoaded", function () {
-                console.log("页面加载完成");
-                // 添加页面加载时的动画效果
-                animatePage();
+        <div class="dialog-container">
+            <div class="dialog-text">欢迎你来到小新的个人博客！</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            animatePage();
+        });
+
+        function animatePage() {
+            const elements = document.querySelectorAll('.animate-me');
+            elements.forEach(element => {
+                element.classList.add('fadeInUp');
             });
+        }
+    </script>
 
-            function animatePage() {
-                // 添加页面加载时的动画效果
-                const elements = document.querySelectorAll('.animate-me');
-                elements.forEach(element => {
-                    element.classList.add('fadeInUp');
-                });
-            }
-        </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url({% static 'img/25.jpg' %});
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position-x: 70%;
+            background-position-y: 12vh;
+        }
 
-        <!-- CSS样式 -->
-        <style>
-            /* 在此添加你的CSS样式 */
-            /* 例如：自定义颜色、字体大小等 */
-            body {
-                background-color: #f8f9fa;
-                font-family: Arial, sans-serif;
-            }
+        .container {
+            margin-top: 0px;
+        }
 
-            .container {
-                margin-top: 0px;
-            }
+        .card {
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
+            background-color: transparent;
+        }
 
-            .card {
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-                margin-bottom: 20px;
-                transition: transform 0.3s ease-in-out;
-            }
+        .card:hover {
+            transform: scale(1.05);
+        }
 
-            .card:hover {
-                transform: scale(1.05);
-            }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease-in-out;
+        }
 
-            .btn {
-                padding: 8px 16px;
-                border-radius: 20px;
-                transition: background-color 0.3s ease-in-out;
-            }
+        .dialog-container {
+            width: 20vw;
+            height: 20vw;
+            background: url({% static 'img/26.png' %}) no-repeat;
+            background-size: contain;
+            position: fixed;
+            right: 7vw;
+            bottom: 7vw;
+            opacity: 1; /* 调整透明度的值，范围从 0（完全透明）到 1（完全不透明） */
+        }
 
-            .btn-primary {
-                background-color: #007bff;
-                color: #fff;
-            }
+        .dialog-text {
+            display: flex;
+            justify-content: center; /* 在主轴上居中 */
+            align-items: center; /* 在交叉轴上居中 */
+            font-size: 23px; /* 设置字体大小 */
+            color: black; /* 设置字体颜色 */
+            padding-top: 100px;
+        }
 
-            .btn-primary:hover {
-                background-color: #0056b3;
-            }
-
-            .btn-secondary {
-                background-color: #6c757d;
-                color: #fff;
-            }
-
-            .btn-secondary:hover {
-                background-color: #343a40;
-            }
-
-            .animate-me {
+        @keyframes fadeInUp {
+            from {
                 opacity: 0;
-                animation-duration: 1s;
-                animation-fill-mode: forwards;
+                transform: translateY(50px);
             }
-
-            .fadeInUp {
-                animation-name: fadeInUp;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
-
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(50px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        </style>
-
+        }
+    </style>
 {% endblock content %}

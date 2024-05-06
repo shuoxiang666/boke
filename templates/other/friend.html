@@ -1,4 +1,3 @@
-<!-- extends表明此页面继承自 base.html 文件 -->
 {% extends "base.html" %}
 {% load staticfiles %}
 
@@ -7,17 +6,54 @@
 {% endblock title %}
 
 {% block content %}
-<br>
-    <h4>友链</h4><hr>
-    {% for friend in friends %}
-    <h5><a href="{{ friend.path }}" target="view_window">{{ friend.title }}</a></h5>
-    <p>{{ friend.main | safe }}</p><hr>
-    {% endfor %}
-    <br><br>
-    <div class="alert alert-success" role="alert">
-        <h5>如何申请友链</h5>
-        1. 贵站博客近期有更新，内容有趣。<br>
-        2. 贵站也有友链专区，且不会太隐蔽。添加本站为友链。<br>
-        3. 可通过邮箱（1151471829@qq.com)联系，提供站名，链接以及简单描述即可。
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-4">友情链接</h4>
+            <hr>
+            {% for friend in friends %}
+            <div class="mb-4">
+                <h5 class="mb-1"><a href="{{ friend.path }}" target="_blank">{{ friend.title }}</a></h5>
+                <p class="text-muted">{{ friend.main | safe }}</p>
+            </div>
+            <hr>
+            {% endfor %}
+            <div class="alert alert-success mt-4" role="alert">
+                <h5>如何申请友链</h5>
+                <ol>
+                    <li>贵站博客近期有更新，内容有趣。</li>
+                    <li>贵站也有友链专区，且不会太隐蔽。添加本站为友链。</li>
+                    <li>可通过邮箱（1151471829@qq.com)联系，提供站名，链接以及简单描述即可。</li>
+                </ol>
+            </div>
+        </div>
     </div>
+</div>
+
+<style>
+.card {
+    border: none;
+    background-color: #f8f9fa;
+}
+
+.card-title {
+    color: #333;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #666;
+}
+
+hr {
+    border-top: 1px solid #ccc;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("页面加载完成");
+    // 在这里执行需要在页面加载后立即执行的 JavaScript 代码
+});
+</script>
 {% endblock content %}

@@ -10,205 +10,164 @@
 {% endblock title %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <h1 class="col-12 mt-4 mb-4">
-            {% if article.belongs %}
-                {{ article.belongs }}:
+    <style>
+        /* 自定义博客样式 */
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .card-text {
+            color: #333;
+        }
+
+    </style>
+    <div class="container">
+        <div class="row">
+            <h1 class="col-12 mt-4 mb-4">
+                {% if article.belongs %}
+                    {{ article.belongs }}:
+                {% endif %}
+                {{ article.title }}</h1>
+            <!-- 标题图 -->
+            {% if article.avatar %}
+                <div class="col-12">
+                    <img src="{{ article.avatar.url }}" alt="avatar" class="img-fluid rounded mb-4">
+                </div>
             {% endif %}
-            {{ article.title }}</h1>
-        <!-- 标题图 -->
-        {% if article.avatar %}
-            <div class="col-12">
-                <img src="{{ article.avatar.url }}" alt="avatar" class="img-fluid rounded mb-4">
+            <div class="col-12 card bg-light mb-3" id="article-info">
+                <div class="card-body">
+                    <h5 class="card-title mb-0">作者：{{ article.author }}</h5>
+                    {% if user == article.author %}
+                        <div class="mt-2">
+                            <a href="#" class="btn btn-danger btn-sm" onclick="confirm_delete()">删除文章</a>
+                            <a href="{% url 'article:article_update' article.id %}" class="btn btn-primary btn-sm ml-2">编辑文章</a>
+                        </div>
+                    {% endif %}
+                    <div class="mt-2">
+                        <p class="card-text mb-0">浏览：{{ article.total_views }}</p>
+                    </div>
+                </div>
             </div>
-        {% endif %}
-        <div class="col-12 alert alert-success">
-            作者：{{ article.author }}
-            {% if user == article.author %}
-                <br>
-                <a href="#" onclick="confirm_delete()">删除文章</a>
-                <br>
-                <a href="{% url 'article:article_update' article.id %}">编辑文章</a>
-            {% endif %}
-            <br>
-            <!-- 显示浏览量 -->
-            <div>
-                浏览：{{ article.total_views }}
+            <div class="col-12 card bg-white mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">摘要</h5>
+                    <p class="card-text">{{ article.main }}</p>
+                </div>
             </div>
-        </div>
-        <div class="col-12 alert alert-info mb-4">摘要：{{ article.main }}</div>
-        <div class="col-12">
-            <style type="text/css">
-                #article_id > p > img {
-                    width: 100%;
-                }
-            </style>
-            <div id="article_id">
-                <p>{{ article.body|safe }}</p>
-            </div>
-        </div>
-        <!-- 相邻文章导航 -->
-        {% if pre_article %}
-            <div class="col-auto mb-3">
-                <a href="{{ pre_article.get_absolute_url }}" class="btn btn-outline-info">
-                    上一篇: {{ pre_article.title }}
-                </a>
-            </div>
-        {% endif %}
-        {% if next_article %}
-            <div class="col-auto mb-3 ml-auto">
-                <a href="{{ next_article.get_absolute_url }}" class="btn btn-outline-info">
-                    下一篇: {{ next_article.title }}
-                </a>
-            </div>
-        {% endif %}
-        <hr>
-        <hr>
-        <!-- 发表评论 -->
-        <hr>
-        <hr>
-        <div class="col-12 mt-4">
-            {% if user.is_authenticated %}
-                <form action="{% url 'comment:post_comment' article.id %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="body"><strong>我也要发言：</strong></label>
-                        <div>
-                            {{ comment_form.media }}
-                            {{ comment_form.body }}
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="article" class="card">
+                            <div class="card-body">
+                                {{ article.body|safe }}
+                            </div>
                         </div>
                     </div>
-                    <!-- 提交按钮 -->
-                    <button type="submit" class="btn btn-primary">
-                        <i class="zi zi_fly"></i> 发送
-                    </button>
-                </form>
-            {% else %}
-                <p>请<a href="{% url 'userprofile:login' %}">登录</a>后回复</p>
+                </div>
+            </div>
+            <!-- 相邻文章导航 -->
+            {% if pre_article %}
+                <div class="col-auto mb-3">
+                    <a href="{{ pre_article.get_absolute_url }}" class="btn btn-outline-info">
+                        上一篇: {{ pre_article.title }}
+                    </a>
+                </div>
             {% endif %}
-        </div>
-        <hr>
-        <hr>
-        <!-- 显示评论 -->
-        <div class="col-12 mt-4">
-            <h4>共有{{ comments.count }}条评论</h4>
-            {% for comment in comments %}
-                <hr>
-                <p>
-                    <strong style="color: pink">{{ comment.user }}</strong>
-                    于<span style="color: green">{{ comment.created | timesince_zh }}</span> 评论：
-                </p>
-                <div id="comment_elem_{{ comment.id }}">{{ comment.body|safe }}</div>
-            {% endfor %}
+            {% if next_article %}
+                <div class="col-auto mb-3 ml-auto">
+                    <a href="{{ next_article.get_absolute_url }}" class="btn btn-outline-info">
+                        下一篇: {{ next_article.title }}
+                    </a>
+                </div>
+            {% endif %}
+            <hr>
+            <hr>
+            <!-- 发表评论 -->
+            <hr>
+            <hr>
+            <div class="col-12 mt-4">
+                {% if user.is_authenticated %}
+                    <form action="{% url 'comment:post_comment' article.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="body"><strong>我也要发言：</strong></label>
+                            <div>
+                                {{ comment_form.media }}
+                                {{ comment_form.body }}
+                            </div>
+                        </div>
+                        <!-- 提交按钮 -->
+                        <button type="submit" class="btn btn-primary">
+                            <i class="zi zi_fly"></i> 发送
+                        </button>
+                    </form>
+                {% else %}
+                    <p>请<a href="{% url 'userprofile:login' %}">登录</a>后回复</p>
+                {% endif %}
+            </div>
+            <hr>
+            <hr>
+            <!-- 显示评论 -->
+            <div class="col-12 mt-4">
+                <h4>共有{{ comments.count }}条评论</h4>
+                {% for comment in comments %}
+                    <hr>
+                    <p>
+                        <strong style="color: pink">{{ comment.user }}</strong>
+                        于<span style="color: green">{{ comment.created | timesince_zh }}</span> 评论：
+                    </p>
+                    <div id="comment_elem_{{ comment.id }}">{{ comment.body|safe }}</div>
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
-</div>
-<script>
-    // 删除文章的函数
-    function confirm_delete() {
-        // 调用layer弹窗组件
-        layer.open({
-            // 弹窗标题
-            title: "确认删除",
-            // 正文
-            content: "确认删除这篇文章吗？",
-            // 点击确定按钮后调用的回调函数
-            yes: function (index, layero) {
-                // 指定应当前往的 url
-                location.href = '{% url "article:article_delete" article.id %}'
-            },
-        })
-    }
-</script>
+    </div>
+    <script>
+        document.getElementById("article-info").addEventListener("click", function () {
+            this.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.2)";
+        });
+
+        // 删除文章的函数
+        function confirm_delete() {
+            // 调用layer弹窗组件
+            layer.open({
+                // 弹窗标题
+                title: "确认删除",
+                // 正文
+                content: "确认删除这篇文章吗？",
+                // 点击确定按钮后调用的回调函数
+                yes: function (index, layero) {
+                    // 指定应当前往的 url
+                    location.href = '{% url "article:article_delete" article.id %}'
+                },
+            })
+        }
+    </script>
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'sticky_sidebar/jquery.sticky-sidebar.min.js' %}"></script>
-<script>
-    $('#sidebar').stickySidebar({
-        topSpacing: 20,
-        bottomSpacing: 20,
-    });
-</script>
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>
-<script src="{% static 'csrf.js' %}"></script>
-<script>
-    // 点赞功能主函数
-    function validate_is_like(url, id, likes) {
-        // 取出 LocalStorage 中的数据
-        let storage = window.localStorage;
-        const storage_str_data = storage.getItem("my_blog_data");
-        let storage_json_data = JSON.parse(storage_str_data);
-        // 若数据不存在，则创建空字典
-        if (!storage_json_data) {
-            storage_json_data = {}
-        }
-        ;
-        // 检查当前文章是否已点赞。是则 status = true
-        const status = check_status(storage_json_data, id);
-        if (status) {
-            layer.msg('已经点过赞了哟~');
-            // 点过赞则立即退出函数
-            return;
-        } else {
-            // 用 Jquery 找到点赞数量，并 +1
-            $('span#likes_number').text(likes + 1).css('color', '#dc3545');
-        }
-        // 用 ajax 向后端发送 post 请求
-        $.post(
-            url,
-            // post 只是为了做 csrf 校验，因此数据为空
-            {},
-            function (result) {
-                if (result === 'success') {
-                    // 尝试修改点赞数据
-                    try {
-                        storage_json_data[id] = true;
-                    } catch (e) {
-                        window.localStorage.clear();
-                    }
-                    ;
-                    // 将字典转换为字符串，以便存储到 LocalStorage
-                    const d = JSON.stringify(storage_json_data);
-                    // 尝试存储点赞数据到 LocalStorage
-                    try {
-                        storage.setItem("my_blog_data", d);
-                    } catch (e) {
-                        // code 22 错误表示 LocalStorage 空间满了
-                        if (e.code === 22) {
-                            window.localStorage.clear();
-                            storage.setItem("my_blog_data", d);
-                        }
-                    }
-                    ;
-                } else {
-                    layer.msg("与服务器通信失败..过一会儿再试试呗~");
-                }
+    <script src="{% static 'sticky_sidebar/jquery.sticky-sidebar.min.js' %}"></script>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 20,
+            bottomSpacing: 20,
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script src="{% static 'csrf.js' %}"></script>
 
-            }
-        );
-    };
-
-    // 辅助点赞主函数，验证点赞状态
-    function check_status(data, id) {
-        // 尝试查询点赞状态
-        try {
-            if (id in data && data[id]) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (e) {
-            window.localStorage.clear();
-            return false;
-        }
-        ;
-    };
-</script>
 {% endblock script %}
