@@ -1,6 +1,4 @@
 from django.contrib import admin
-from .models import Friend, SiteMessage, Timeline
+from .models import Friend
 # Register your models here.
 admin.site.register(Friend)
-admin.site.register(SiteMessage)
-admin.site.register(Timeline)

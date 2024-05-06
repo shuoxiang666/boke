@@ -49,7 +49,7 @@ def post_comment(request, article_id, parent_comment_id=None):
             'article_id': article_id,
             'parent_comment_id': parent_comment_id
         }
-        return render(request, 'comment/reply.html', context)
+        return render(request, 'article/detail.html', context)
     # 处理其他请求
     else:
         return HttpResponse("仅接受GET/POST请求。")

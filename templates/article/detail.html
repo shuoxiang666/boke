@@ -63,16 +63,6 @@
                 </a>
             </div>
         {% endif %}
-        <div class="col-12 mt-4">
-            <button class="btn btn-danger" onclick="validate_is_like(
-                '{% url 'article:increase_likes' article.id %}',
-                {{ article.id }},
-                {{ article.likes }}
-                )">
-                <i class="zi zi_love"></i> 点赞
-                <span id="likes_number">{{ article.likes }}</span>
-            </button>
-        </div>
         <hr>
         <hr>
         <!-- 发表评论 -->

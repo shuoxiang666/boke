@@ -24,33 +24,6 @@ class Friend(models.Model):
         return self.title
 
 
-class SiteMessage(models.Model):
-    objects = None
-    content = models.TextField()
-    created = models.DateTimeField(default=timezone.now)
-
-    class Meta:
-        verbose_name_plural = '全站公告'
-
-    def __str__(self):
-        return self.content[:20]
-
-
-class Timeline(models.Model):
-    objects = None
-    author = models.CharField(max_length=10000, blank=True, default="Wang")
-    content = models.TextField()
-    path = models.CharField(max_length=10000, blank=True)
-    created = models.DateField(default=timezone.now)
-
-    class Meta:
-        ordering = ('-created',)
-        verbose_name_plural = '网站归档'
-
-    def __str__(self):
-        return self.content[:20]
-
-
 class Message(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()

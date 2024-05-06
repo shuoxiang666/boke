@@ -29,11 +29,6 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{% url 'article:article_list' %}?order=likes&search={{ search }}&column={{ column }}&tag={{ tag }}">
-                                    喜欢
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item">
                                 <a href="{% url 'article:article_create' %}">发布帖子</a>
                             </li>
                             <li class="breadcrumb-item">
@@ -159,10 +154,6 @@
                         <i class="zi zi_commentalt" zico="评论列表" style="color: yellowgreen;"></i>
                             <!-- 修改为评论的计数 -->
                         {{ article.comments.count }}&nbsp;&nbsp;&nbsp;
-                    </span>
-                        <span>
-                        <i class="zi zi_love" zico="爱心" style="color: brown;"></i>
-                        {{ article.likes }}&nbsp;&nbsp;&nbsp;
                     </span>
                         <span>
                         <i class="zi zi_clock" zico="时钟" style="color: rgb(170, 58, 105);"></i>

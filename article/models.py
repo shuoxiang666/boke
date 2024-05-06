@@ -42,8 +42,7 @@ class ArticlePost(models.Model):
     )
     tags = TaggableManager(blank=True)
     belongs = models.CharField(max_length=58, blank=True)
-    total_views = models.PositiveIntegerField(default=0)
-    likes = models.PositiveIntegerField(default=0)
+    total_views = models.PositiveIntegerField(default=0)  # 浏览量
     title = models.CharField(max_length=75)  # 标题
     # 获取当前日期和时间
     current_time = datetime.now()

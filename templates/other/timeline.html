@@ -3,157 +3,58 @@
 {% load staticfiles %}
 
 {% block title %}
-    时间线
+    Top文章榜单
 {% endblock title %}
 
 {% block content %}
-<div class="container">
-    <div class="timeline">
-        <!-- 已存在的事件 -->
-        <div class="timeline-item" onclick="showNextEvent(0)">
-            <div class="timeline-content">
-                <h2>2022</h2>
-                <p>这是一段描述。</p>
-                <img src="{% static 'img/1.jpg' %}" alt="Event 1" class="event-image">
-            </div>
-        </div>
-        <div class="timeline-item" onclick="showNextEvent(1)" style="display: none;">
-            <div class="timeline-content">
-                <h2>2023</h2>
-                <p>这是另一段描述。</p>
-                <img src="{% static 'img/2.jpg' %}" alt="Event 2" class="event-image">
-            </div>
-        </div>
-        <div class="timeline-item" onclick="showNextEvent(2)" style="display: none;">
-            <div class="timeline-content">
-                <h2>2024</h2>
-                <p>这是又一段描述。</p>
-                <img src="{% static 'img/3.jpg' %}" alt="Event 3" class="event-image">
-            </div>
-        </div>
-        <!-- 新添加的事件 -->
-        <div class="timeline-item" onclick="showNextEvent(3)" style="display: none;">
-            <div class="timeline-content">
-                <h2>2025</h2>
-                <p>这是第四个事件描述。</p>
-                <img src="{% static 'img/4.jpg' %}" alt="Event 4" class="event-image">
-            </div>
-        </div>
-        <div class="timeline-item" onclick="showNextEvent(4)" style="display: none;">
-            <div class="timeline-content">
-                <h2>2026</h2>
-                <p>这是第五个事件描述。</p>
-                <img src="{% static 'img/5.jpg' %}" alt="Event 5" class="event-image">
-            </div>
-        </div>
-        <!-- 最后一个事件 -->
-        <div id="last-event" class="timeline-item" style="display: none;">
-            <div class="timeline-content">
-                <h2>2027</h2>
-                <p>这是最后一段描述。</p>
-                <img src="{% static 'img/6.jpg' %}" alt="Last Event" class="event-image">
+    <div class="container">
+        <h1 class="text-center mt-5 mb-4">Top Three Posts</h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div id="top-posts-chart" style="height: 400px;"></div>
             </div>
         </div>
     </div>
-</div>
+    {% block script %}
+        <script>
+            // 渲染图表函数
+            function renderChart() {
+                // 从 Django 模板中获取 JSON 数据
+                var topPostsData = JSON.parse('{{ top_posts_json|safe }}');
 
-<div class="wave-container">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#0099ff" fill-opacity="1" d="M0,96L60,112C120,128,240,160,360,154.7C480,149,600,107,720,106.7C840,107,960,149,1080,186.7C1200,224,1320,256,1380,272L1440,288L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
-</div>
+                // 从 QuerySet 中提取文章标题和浏览量数据
+                var titles = topPostsData.map(post => post.fields.title);
+                var views = topPostsData.map(post => post.fields.total_views);
 
-<style>
-    .timeline {
-        position: relative;
-        max-width: 800px;
-        margin: 50px auto;
-    }
+                // 初始化 ECharts 实例
+                var chart = echarts.init(document.getElementById('top-posts-chart'));
 
-    .timeline-item {
-        position: relative;
-        padding: 20px 40px;
-        background: #f4f4f4;
-        margin: 50px 0;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: transform 0.3s ease-in-out;
-    }
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: '热榜前三的文章如下'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: titles
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: views,
+                        type: 'bar'
+                    }]
+                };
 
-    .timeline-item:hover {
-        transform: scale(1.05);
-    }
+                // 使用刚指定的配置项和数据显示图表
+                chart.setOption(option);
+            }
 
-    .timeline-item::before {
-        content: '';
-        position: absolute;
-        width: 2px;
-        height: 100%;
-        background: #333;
-        top: 0;
-        left: 20px;
-    }
+            // 调用函数以在页面加载时渲染图表
+            renderChart();
+        </script>
 
-    .timeline-content {
-        position: relative;
-    }
-
-    .timeline-content h2 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .timeline-content p {
-        font-size: 16px;
-        line-height: 1.6;
-    }
-
-    .event-image {
-        max-width: 100%;
-        border-radius: 8px;
-        margin-top: 20px;
-    }
-
-    #last-event {
-        animation: pulse 1s infinite alternate;
-    }
-
-    @keyframes pulse {
-        0% {
-            transform: scale(1);
-        }
-        100% {
-            transform: scale(1.1);
-        }
-    }
-
-    .wave-container {
-        position: relative;
-        width: 100%;
-        height: 100px;
-        overflow: hidden;
-        margin-top: 50px;
-    }
-
-    .wave-container svg {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: auto;
-    }
-</style>
-
-<script>
-    let currentIndex = 0;
-    const timelineItems = document.querySelectorAll('.timeline-item');
-
-    function showNextEvent(index) {
-        timelineItems[currentIndex].style.display = 'none';
-        currentIndex = index + 1;
-        if (currentIndex < timelineItems.length) {
-            timelineItems[currentIndex].style.display = 'block';
-        } else {
-            document.getElementById('last-event').style.display = 'block';
-        }
-    }
-</script>
+    {% endblock script %}
 {% endblock content %}
+
